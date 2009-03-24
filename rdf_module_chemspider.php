@@ -28,11 +28,14 @@ $url = "http://inchis.chemspider.com/Resolver.aspx?q=" . urlencode($inchi);
 $content = get_content($url);
 # aspx?id=1& 
 preg_match("/aspx\?id=(\d*)/", $content, $matches, PREG_OFFSET_CAPTURE);
-# pick only one, the last
-# echo "CHEBI found: " . $value[0] . "\n";
-# $chebi = $value[0];
-echo "<rdfomn:csid>" . $value[0] . "</rdfomn:csid>";
-# echo "<owl:sameAs rdf:resource=\"http://bio2rdf.org/chebi:" . $value[0] . "\"/>";
+
+foreach ($matches as $value) {
+  # pick only one, the last
+  echo "<!-- CSID found: " . $value[0] . " -->\n";
+  # $chebi = $value[0];
+  echo "<rdfomn:csid>" . $value[0] . "</rdfomn:csid>";
+  # echo "<owl:sameAs rdf:resource=\"http://bio2rdf.org/chebi:" . $value[0] . "\"/>";
+}
 
 ?>
 
