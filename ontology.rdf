@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY dcns 'http://dublincore.org/2006/12/18/dces.rdf#'>
+    <!ENTITY rdfomnns 'http://rdf.openmolecules.net/ontology.rdf#'>
+]>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www/w3.org/2000/01/rdf-schema#"
+         xmlns:rdfomn="&rdfomnns;"
+         xmlns:dc="&dcns;"
+         xml:base="&rdfomnns;">
+
+<rdfs:Class rdf:ID="ChemicalCompound">
+  <rdfs:label>Chemical Compound</rdfs:label>
+  <rdfs:comment>Same meaning as compound on PubChem, though I could not
+    find the definition there.</rdfs:comment>
+</rdfs:Class>
+
+<rdf:Property rdf:ID="name">
+  <rdfs:label>Name</rdfs:label>
+  <rdfs:domain rdf:resource="&rdfomnns;ChemicalCompound"/>
+  <rdfs:subPropertyOf rdf:resource="&dcns;title"/>
+</rdf:Property>
+
+<rdf:Property rdf:ID="uniqueIdentifier">
+  <rdfs:label>Unique Identifier</rdfs:label>
+  <rdfs:domain rdf:resource="&rdfomnns;ChemicalCompound"/>
+  <rdfs:subPropertyOf rdf:resource="&dcns;identifier"/>
+</rdf:Property>
+
+<rdf:Property rdf:ID="inchi">
+  <rdfs:label>IUPAC International Chemical Identifier (InChI)</rdfs:label>
+  <rdfs:domain rdf:resource="&rdfomnns;ChemicalCompound"/>
+  <rdfs:subPropertyOf rdf:resource="&rdfomnns;uniqueIdentifier"/>
+</rdf:Property>
+
+<rdf:Property rdf:ID="ChEBIID">
+  <rdfs:label>ChEBI ID</rdfs:label>
+  <rdfs:domain rdf:resource="&rdfomnns;ChemicalCompound"/>
+  <rdfs:suPropertyOf rdf:resource="&dcns;identifier"/>
+</rdf:Property>
+
+<rdf:Property rdf:ID="PubChemCID">
+  <rdfs:label>PubChem Compound ID</rdfs:label>
+  <rdfs:domain rdf:resource="&rdfomnns;ChemicalCompound"/>
+  <rdfs:subPropertyOf rdf:resource="&dcns;identifier"/>
+</rdf:Property>
+
+<rdf:Property rdf:ID="SMILES">
+  <rdfs:label>SMILES</rdfs:label>
+  <rdfs:domain rdf:resource="&rdfomnns;ChemicalCompound"/>
+  <rdfs:subPropertyOf rdf:resource="&rdfomnns;name"/>
+</rdf:Property>
+
+</rdf:RDF>
