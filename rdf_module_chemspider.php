@@ -27,7 +27,7 @@ include_once("getcontent.php");
 $url = "http://inchis.chemspider.com/Resolver.aspx?q=" . urlencode($inchi);
 $content = get_content($url);
 # aspx?id=1& 
-preg_match("/aspx\?id=(\d*)/", $content, $matches, PREG_OFFSET_CAPTURE);
+preg_match("/id=(\d*)/", $content, $matches, PREG_OFFSET_CAPTURE);
 
 foreach ($matches as $value) {
   # pick only one, the last
