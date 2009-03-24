@@ -32,6 +32,7 @@ xmlns:owl="http://www.w3.org/2002/07/owl#">
 <?php include 'rdf_module_connotea.php'?>
 <?php include 'rdf_module_dbpedia.php'?>
 <?php include 'rdf_module_nmrshiftdb.php'?>
+<?php include 'rdf_module_chemspider.php'?>
 
 </rdf:RDF>
 

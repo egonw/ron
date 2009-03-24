@@ -58,6 +58,7 @@
                             <xsl:apply-templates select=".//rdfomn:tag"/>
                             <xsl:apply-templates select=".//owl:sameAs"/>
                             <xsl:apply-templates select=".//rdfomn:nmrmolid"/>
+                            <xsl:apply-templates select=".//rdfomn:csid"/> 
 
                             </xsl:for-each>
 
@@ -141,6 +142,26 @@ alt="RDF Resource Description Framework Powered Icon"/></a>
                 <xsl:value-of select="."/>
             </td>
         </tr>
+   </xsl:template>
+
+   <xsl:template match="//rdfomn:csid">
+        <tr>
+            <td class="header">
+                <xsl:text>ChemSpider ID</xsl:text>
+            </td>
+            <td>
+                <xsl:element name="a">
+                  <xsl:attribute name="href">http://www.chemspider.com/<xsl:value-of select="."/></xsl:attribute>
+                  <xsl:value-of select="."/>
+                </xsl:element>
+            </td>
+        </tr>
+        <tr>
+            <td class="header"/>
+            <td>
+                <img src="http://rdf.openmolecules.net/powered-by-chemspider.png" />
+            </td>
+        </tr> 
    </xsl:template>
     
    <xsl:template match="//rdfomn:chebiid">

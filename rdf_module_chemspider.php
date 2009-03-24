@@ -14,7 +14,6 @@
     $inchi = "InChI=1/CH4/h1H4";
   }
 
-  $inchi = "InChI=1/CH4/h1H4"; 
 ?>
 
 <rdf:Description
