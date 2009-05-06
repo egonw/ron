@@ -25,7 +25,7 @@
 include_once("getcontent.php");
 
 $url = "http://www.connotea.org/data/tags/uri/http://rdf.openmolecules.net/?" . $inchi;
-$content = get_content($url);
+$content = get_connotea_content($url);
 
 echo "  <!-- $url -->\n";
 
