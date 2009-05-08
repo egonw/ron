@@ -34,7 +34,7 @@
 
 	        $query = $query.$where_clause;
 
-	        print "<!-- DEBUG: query = $query --><br />\n";
+	        print "<!-- DEBUG: query = $query -->\n";
         	$results = mysql_query($query);
 
 	        $rows = mysql_num_rows($results);
