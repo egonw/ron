@@ -13,6 +13,11 @@
   if (strlen($inchi) === 0) {
     $inchi = "InChI=1/CH4/h1H4";
   }
+  if (strlen($inchi) < 8 ||
+      (substr($inchi, 0,8) != "InChI=1/" &&
+       substr($inchi, 0,9) != "InChI=1S/")) {
+    $inchi = "InChI=1/CH4/h1H4";
+  }
 ?>
 
 <rdf:Description

@@ -11,6 +11,11 @@
   if (strlen($inchi) === 0) {
     $inchi = "InChI=1/CH4/h1H4";
   }
+  if (strlen($inchi) < 8 ||
+      (substr($inchi, 0,8) != "InChI=1/" &&
+       substr($inchi, 0,9) != "InChI=1S/")) {
+    $inchi = "InChI=1/CH4/h1H4";
+  }
 ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -29,7 +34,7 @@ xmlns:owl="http://www.w3.org/2002/07/owl#">
 
 <?php include 'rdf_module_cb.php'?>
 <?php include 'rdf_module_chebi.php'?>
-<?php include 'rdf_module_connotea.php'?>
+<?php // include 'rdf_module_connotea.php'?>
 <?php include 'rdf_module_dbpedia.php'?>
 <?php include 'rdf_module_nmrshiftdb.php'?>
 <?php //include 'rdf_module_chemspider.php'?>
