@@ -21,6 +21,7 @@
 xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:iupac="http://www.iupac.org/"
 xmlns:rdfomn="http://rdf.openmolecules.net/#"
+xmlns:foaf="http://xmlns.com/foaf/0.1/"
 xmlns:owl="http://www.w3.org/2002/07/owl#">
 
 <rdf:Description

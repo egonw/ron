@@ -10,6 +10,7 @@
     xmlns:rdfomn="http://rdf.openmolecules.net/#"
     xmlns:cb="http://cb.openmolecules.net/#"    
     xmlns:pubchem="http://pubchem.ncbi.nlm.nih.gov/#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
 
     exclude-result-prefixes="rdf rdfs iupac dc">
@@ -59,6 +60,7 @@
                             <xsl:apply-templates select=".//owl:sameAs"/>
                             <xsl:apply-templates select=".//rdfomn:nmrmolid"/>
                             <xsl:apply-templates select=".//rdfomn:csid"/> 
+                            <xsl:apply-templates select=".//foaf:homepage"/>
 
                             </xsl:for-each>
 
@@ -84,6 +86,20 @@ alt="RDF Resource Description Framework Powered Icon"/></a>
         <tr>
             <td class="header">
                 <xsl:text>owl:sameAs</xsl:text>
+            </td>
+            <td>
+                <xsl:element name="a">
+                  <xsl:attribute name="href"><xsl:value-of select="./@rdf:resource"/></xsl:attribute>
+                  <xsl:value-of select="./@rdf:resource"/>
+                </xsl:element>
+            </td>
+        </tr>
+    </xsl:template>
+
+    <xsl:template match="//foaf:homepage">
+        <tr>
+            <td class="header">
+                <xsl:text>foaf:homepage</xsl:text>
             </td>
             <td>
                 <xsl:element name="a">
