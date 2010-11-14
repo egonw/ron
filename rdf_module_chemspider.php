@@ -13,43 +13,50 @@
   if (strlen($inchi) === 0) {
     $inchi = "InChI=1/CH4/h1H4";
   }
-
+  if (strlen($inchi) < 8 ||
+      (substr($inchi, 0,8) != "InChI=1/" &&
+       substr($inchi, 0,9) != "InChI=1S/")) {
+    $inchi = "InChI=1/CH4/h1H4";
+  }
 ?>
 
 <rdf:Description
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
  rdf:about="http://rdf.openmolecules.net/?<?php echo $inchi;?>">
 
   <dc:source>ChemSpider</dc:source>
 
-<?php
+<?
 
-include_once("getcontent.php");
-
-# because a nasty redirect is involved, it is a double loop :(
-
-$url = "http://inchis.chemspider.com/Resolver.aspx?q=" . $inchi;
-print "<!-- $url -->\n";
-$content = get_content($url);
-# print "<!-- " . $content . " -->";
-# first, deal with the redirect
-preg_match("/%2fRecord.aspx%3fid%3d(\d*)/", $content, $matches, PREG_OFFSET_CAPTURE);
-
-foreach ($matches as $value) {
-  if (!ereg("Record.aspx", $value[0])) {
-    $url2 = "http://inchis.chemspider.com/Record.aspx?id=" . $value[0];
-    $content2 = get_content($url2);
-    # print "<!-- " . $content2 . " -->";
-    # first, deal with the redirect
-    preg_match("/ctl00_ContentPlaceHolder1_CompoundViewControl1_HyperLink2.*www.chemspider.com\/(\d*)/", $content2, $matches2, PREG_OFFSET_CAPTURE); 
-    foreach ($matches2 as $value2) {
-      if (!ereg("chemspider.com", $value2[0])) {
-        echo "<!-- CSID found: " . $value2[0] . " -->\n";
-        echo "<rdfomn:csid>" . $value2[0] . "</rdfomn:csid>";
-        # echo "<owl:sameAs rdf:resource=\"http://bio2rdf.org/chebi:" . $value[0] . "\"/>";
-      }
-    }
-  }
+function startsWith($haystack,$needle,$case=true) {
+    if($case){return (strcmp(substr($haystack, 0, strlen($needle)),$needle)===0);}
+    return (strcasecmp(substr($haystack, 0, strlen($needle)),$needle)===0);
 }
+
+        $paper_id = false;
+
+        $safe_inchi = mysql_escape_string($inchi);
+
+        if ($safe_inchi) {
+                echo "<!-- DEBUG: inchi=".$safe_inchi." -->\n";
+	        $query = "SELECT SQL_CALC_FOUND_ROWS * FROM chemspider ";
+                if (startsWith($safe_inchi, 'InChI=1S')) {
+                   $where_clause = "WHERE SINCHI = '$safe_inchi'";
+                } else {
+          	  $where_clause = "WHERE INCHI = '$safe_inchi'";
+                }
+
+	        $query = $query.$where_clause;
+
+	        print "<!-- DEBUG: query = $query -->\n";
+        	$results = mysql_query($query);
+
+	        $rows = mysql_num_rows($results);
+	        while ($row = mysql_fetch_assoc($results)) {
+                        $molid = $row['csid'];
+                        print "<foaf:homepage rdf:resource=\"http://www.chemspider.com/Chemical-Structure.$molid.html\"/>\n";
+		}
+        }
 
 ?>
 
