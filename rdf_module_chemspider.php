@@ -55,6 +55,7 @@ function startsWith($haystack,$needle,$case=true) {
 	        while ($row = mysql_fetch_assoc($results)) {
                         $molid = $row['csid'];
                         print "<foaf:homepage rdf:resource=\"http://www.chemspider.com/Chemical-Structure.$molid.html\"/>\n";
+                        print "<owl:sameAs rdf:resource=\"http://www.chemspider.com/Chemical-Structure.$molid.rdf#Compound\"/>\n";
 		}
         }
 
