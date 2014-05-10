@@ -16,19 +16,30 @@
        substr($inchi, 0,9) != "InChI=1S/")) {
     $inchi = "InChI=1/CH4/h1H4";
   }
+
+  $inchi = urldecode($inchi);
 ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
-xmlns:iupac="http://www.iupac.org/"
 xmlns:rdfomn="http://rdf.openmolecules.net/#"
 xmlns:foaf="http://xmlns.com/foaf/0.1/"
-xmlns:owl="http://www.w3.org/2002/07/owl#">
+xmlns:owl="http://www.w3.org/2002/07/owl#"
+xmlns:resource="http://semanticscience.org/resource/"
+>
 
 <rdf:Description
  rdf:about="http://rdf.openmolecules.net/?<?php echo $inchi;?>">
 
+ <rdfs:subClassOf rdf:resource="http://semanticscience.org/resource/CHEMINF_000000"/>
+ <resource:CHEMINF_000200>
+   <rdf:Description>
+     <rdf:type rdf:resource="http://semanticscience.org/resource/CHEMINF_000113"/>
+     <resource:SIO_000300><?php echo $inchi;?></resource:SIO_000300>
+   </rdf:Description>
+ </resource:CHEMINF_000200>
+
  <dc:identifier>info:inchi/<?php echo $inchi;?></dc:identifier>
- <iupac:inchi><?php echo $inchi;?></iupac:inchi>
 
 </rdf:Description>
 
@@ -37,8 +48,9 @@ xmlns:owl="http://www.w3.org/2002/07/owl#">
 <?php include 'rdf_module_chebi.php'?>
 <?php // include 'rdf_module_connotea.php'?>
 <?php include 'rdf_module_dbpedia.php'?>
-<?php include 'rdf_module_nmrshiftdb.php'?>
+<?php // include 'rdf_module_nmrshiftdb.php'?>
 <?php include 'rdf_module_chemspider.php'?>
+<?php include 'rdf_module_opentox.php'?>
 
 </rdf:RDF>
 
