@@ -5,12 +5,12 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:iupac="http://www.iupac.org/"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:rdfomn="http://rdf.openmolecules.net/#"
     xmlns:cb="http://cb.openmolecules.net/#"    
     xmlns:pubchem="http://pubchem.ncbi.nlm.nih.gov/#"
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:resource="http://semanticscience.org/resource/"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
 
     exclude-result-prefixes="rdf rdfs iupac dc">
@@ -45,13 +45,13 @@
                             </tr>
                             
                             <xsl:for-each select="//rdf:Description">
-                            <tr><td><br /></td><td/></tr>
+                            <tr><td><br /> </td><td/></tr>
 
                             <xsl:apply-templates select="./dc:source"/>
                             <xsl:apply-templates select="./dc:rights"/>
                             <xsl:apply-templates select="./dc:identifier"/>
+                            <xsl:apply-templates select="./resource:SIO_000300"/>
 
-                            <xsl:apply-templates select=".//iupac:inchi"/>
                             <xsl:apply-templates select=".//cb:discussedBy"/>
                             <xsl:apply-templates select=".//pubchem:cid"/>
                             <xsl:apply-templates select=".//pubchem:name"/>
@@ -65,9 +65,9 @@
                             </xsl:for-each>
 
                             <tr><td><br /></td><td/></tr>
-                            <xsl:call-template name="delicious">
-                                <xsl:with-param name="title">OpenMolecules RDF for <xsl:value-of select="//iupac:inchi"/></xsl:with-param>
-                            </xsl:call-template>
+                            <!-- xsl:call-template name="delicious">
+                                <xsl:with-param name="title">OpenMolecules RDF for <xsl:value-of select="//dc:identifier"/></xsl:with-param>
+                            </xsl:call-template -->
 
                         </table>
                </xsl:element>
@@ -110,7 +110,7 @@ alt="RDF Resource Description Framework Powered Icon"/></a>
         </tr>
     </xsl:template>
 
-    <xsl:template match="//iupac:inchi">
+    <xsl:template match="resource:SIO_000300">
         <tr>
             <td class="header">
                 <xsl:text>InChI</xsl:text>
@@ -253,8 +253,8 @@ alt="RDF Resource Description Framework Powered Icon"/></a>
     </xsl:template>
 
     <!-- Display link to add to del.icio.us so this object can be bookmarked. -->
-    <xsl:template name="delicious">
-        <!-- template copied from http://bioguid.info/html.xsl -->
+    <!-- xsl:template name="delicious">
+        <!- - template copied from http://bioguid.info/html.xsl - ->
         <xsl:param name="title" select="string()"/>
         <xsl:variable name="uri" select="//@rdf:about"/>
         <tr>
@@ -284,6 +284,6 @@ alt="RDF Resource Description Framework Powered Icon"/></a>
                 </a>
             </td>
         </tr>
-    </xsl:template>
+    </xsl:template -->
 
 </xsl:stylesheet>
