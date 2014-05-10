@@ -37,8 +37,10 @@ foreach ($matches as $value) {
     if (!ereg("CHEBI", $value[0])) {
         # echo "CHEBI found: " . $value[0] . "\n";
         # $chebi = $value[0];
-        echo "<rdfomn:chebiid>CHEBI:" . $value[0] . "</rdfomn:chebiid>";
-        echo "<owl:sameAs rdf:resource=\"http://bio2rdf.org/chebi:" . $value[0] . "\"/>";
+        if ($value[0] != "15377") { // the default 'water' if nothing was found
+          echo "<rdfomn:chebiid>CHEBI:" . $value[0] . "</rdfomn:chebiid>";
+          echo "<owl:sameAs rdf:resource=\"http://bio2rdf.org/chebi:" . $value[0] . "\"/>";
+        }
     }
 }
 
